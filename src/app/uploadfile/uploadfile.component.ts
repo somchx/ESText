@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./uploadfile.component.css']
 })
 export class UploadfileComponent implements OnInit {
-
+  maxFileSize :number =1000;
   constructor() { }
 
   ngOnInit(): void {
