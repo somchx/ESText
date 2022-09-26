@@ -11,7 +11,7 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       { path: 'Home', component: HomeComponent },
-      { path: 'UploadFile', component: UploadfileComponent },
+      { path: 'FileUpload', component: UploadfileComponent },
       { path: 'AboutUs', component: AboutComponent },
 
     ]
