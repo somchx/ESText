@@ -1,37 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
-.box{
-    margin-top: 200px ;
+
+body {
+    margin-top: 150px;
     margin-left: 12%;
+    font-family: 'Kanit', sans-serif;
 }
-.begin {
-    
+
+.begin,h2 {
     font-family: 'Kanit', sans-serif;
     font-weight: bolder;
     font-size: 24px;
     color: #000;
     text-decoration: none;
 }
-.content{
+h1{
+    padding-left: 10%;
+    padding-right: 10%;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    font-weight: lighter;
+    color: #000;
+}
+
+.content {
     text-indent: 4em;
     font-family: 'Kanit', sans-serif;
     font-weight: lighter;
-    font-size: 20px;
+    font-size: 16px;
     color: #000;
     text-decoration: none;
 }
-.p-button-raised,.p-button-raised:active,.p-button-raised:visited {
-    background-color: #2864B0;
+
+.link {
+    text-decoration: none;
 }
-.p-button-raised:hover{
-    background-color: #1a457e;
-}
-button {
+
+:host ::ng-deep .p-button {
+    margin: 0 .5rem 0 0;
+    min-width: 10rem;
     font-family: 'Kanit', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
-    color: white;
-    text-decoration: none;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-.link{
-    text-decoration: none;
+
+.confirmation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Kanit', sans-serif;
+}
+
+p {
+    text-indent: 4em;
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+    
+}
+
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    height: 20%;
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    
+}
+
+.column {
+    flex: 50%;
+    
+}
+img {
+    position: fixed;
+    transform: translate(55%, -65%);
 }
