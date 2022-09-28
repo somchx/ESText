@@ -20,12 +20,16 @@
     padding: 30px 12%;
 }
 
-.p-button-raised,.p-button-raised:active,.p-button-raised:visited {
+.p-button-raised,
+.p-button-raised:active,
+.p-button-raised:visited {
     background-color: #2864B0;
 }
-.p-button-raised:hover{
+
+.p-button-raised:hover {
     background-color: #1a457e;
 }
+
 button {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
@@ -40,12 +44,14 @@ button {
     background-color: #9ACBE7;
     border-radius: 50%;
     position: fixed;
-    
     transform: translate(75%, -55%);
-    
-  }
-  img{
+}
+
+img {
     position: fixed;
     transform: translate(180%, -75%);
+}
 
-  }
+.link {
+    text-decoration: none;
+}
