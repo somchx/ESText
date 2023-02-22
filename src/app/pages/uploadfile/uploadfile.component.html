@@ -1,0 +1,60 @@
+<div class="nav">
+    <app-navbar></app-navbar>
+</div>
+<body>
+    <p>FileUpload
+        <br><h2>Only audio and video files may be uploaded.</h2>
+    </p>
+    <div class="cover"></div>
+    <div>
+        <label for="images" class="drop-container">
+            <span class="drop-title">Drop file here</span>
+            or
+            <input #fileUploader type="file" id="images" accept="audio/*,video/*" (change)="chooseFile($event)">
+            <p-toast position="top-right" key="tr"></p-toast>
+        </label>
+        <app-audio-recording></app-audio-recording>
+    </div>
+    <div class="spinner" *ngIf="this.isSpinner">
+        <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
+            fill="var(--surface-ground)" animationDuration=".8s"></p-progressSpinner>
+    </div>
+    <div class="box" *ngIf="this.isChoosed">
+        <br>
+        <div>
+         <video [src]="url" *ngIf="this.isVideo" height="200" controls></video>   
+         <video [src]="url" *ngIf="!this.isVideo" height="50" width="350" controls></video>
+        </div>
+        
+        <div class="result" style="width: 62%; float:left">
+            <span class="icon">
+                <svg *ngIf="this.isVideo" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                    class="bi bi-file-earmark-play" viewBox="0 0 16 16">
+                    <path
+                        d="M6 6.883v4.234a.5.5 0 0 0 .757.429l3.528-2.117a.5.5 0 0 0 0-.858L6.757 6.454a.5.5 0 0 0-.757.43z" />
+                    <path
+                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+                <svg *ngIf="this.isVideo==false" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                    fill="currentColor" class="bi bi-file-earmark-music" viewBox="0 0 16 16">
+                    <path
+                        d="M11 6.64a1 1 0 0 0-1.243-.97l-1 .25A1 1 0 0 0 8 6.89v4.306A2.572 2.572 0 0 0 7 11c-.5 0-.974.134-1.338.377-.36.24-.662.628-.662 1.123s.301.883.662 1.123c.364.243.839.377 1.338.377.5 0 .974-.134 1.338-.377.36-.24.662-.628.662-1.123V8.89l2-.5V6.64z" />
+                    <path
+                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                </svg>
+            </span>
+            {{status}}
+        </div>
+        <div style="width: 38%; float:right"> 
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <button (click)="upload()"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+            <button id="red" (click)="resetFileUploader()"><i class="fa fa-trash-o fa-lg"></i> Clear</button>
+        </div>
+    </div>
+
+    <a class="link" href="/Result">
+        <div class="button">
+            <button *ngIf="this.isUpload">Get Process</button>
+        </div>
+    </a>
+</body>
