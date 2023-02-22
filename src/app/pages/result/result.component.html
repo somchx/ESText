@@ -1,110 +1,125 @@
-<div *ngIf="!result?.class && !this.isError"  >
+<div *ngIf="!result?.class && !this.isError " >
+    
     <p-blockUI [blocked]="blockedDocument"></p-blockUI>
     <div class="nav">
         <app-navbar></app-navbar>
     </div>
+    <br>
+    <h1 style="text-align: center; font-size: 30px;">Processing...</h1>
+    <h2>Working on process, Don't close this windows while processing</h2>
     <div class="spinner">
-        <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
+
+        <p-progressSpinner *ngIf="this.loadingPercent<100" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
             fill="var(--surface-ground)" animationDuration=".8s"></p-progressSpinner>
+        <p-progressSpinner *ngIf="this.loadingPercent===100" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
+            fill="var(--surface-ground)" animationDuration=".25s"></p-progressSpinner>
+        <br>
+        
     </div>
+    <span>Please wait... {{loadingPercent}} %</span>
 </div>
 
 <div *ngIf="result?.class">
     <div class="nav">
         <app-navbar></app-navbar>
     </div>
-<p>Processing Completion!
-    <br><h2>You can download and copy the results of the processing.</h2>
-</p>
-<div class="video" style="width: 35%; float:left">
-    <div class="subtitle">
-        <h1>Video + Subtitle</h1>
-    </div>
-    <div class="cover">
-        <div class="title" style="width: 55%; float:left">
-            <br>
-            <h1>video3_file.mp4</h1>
+    <p>Processing Completion!
+        <br><h2>You can download and copy the results of the processing.</h2>
+    </p>
+    <div class="video" style="width: 35%; float:left">
+        <div class="subtitle">
+            <h1>Video + Subtitle</h1>
         </div>
-        <div class="dl" style="width: 30%; float:right">
-            <br>
-            <button (click)="video_download()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
-        </div>
-        <video id="vdo" height="272" width="520" controls></video>
-        <div style="padding-top: 80px;">
-            <button (click)="download()"><i class="fa fa-download" aria-hidden="true"></i> Download All</button>
-            <div style="width: 33%; float:right">
-                <a class="link" href="/FileUpload">
-                    <button class="again-button" (click)="again()"><i class="fa fa-refresh" aria-hidden="true"></i> Get process again</button>
-                </a>
+        <div class="cover">
+            <div class="title" style="width: 55%; float:left">
+                <br>
+                <h1>video3_file.mp4</h1>
+            </div>
+            <div class="dl" style="width: 30%; float:right">
+                <br>
+                <button (click)="video_download()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
+            </div>
+            <video id="vdo" height="272" width="520" controls></video>
+            <div style="padding-top: 80px;">
+                <button (click)="download()"><i class="fa fa-download" aria-hidden="true"></i> Download All</button>
+                <div style="width: 33%; float:right">
+                    <a class="link" href="/FileUpload">
+                        <button class="again-button" (click)="again()"><i class="fa fa-refresh" aria-hidden="true"></i>
+                            Get process again</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
-<div class="result" style="width: 45%; float:right">
-    <div style="width: 65%; float:left">
-        <h1>Speech Recognition</h1>
-    </div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <h3 (click)="copyMessage()">
-        <i *ngIf="!this.isCopy" class="fa fa-clipboard" aria-hidden="true"></i>
-        <i *ngIf="this.isCopy" class="fa fa-check" aria-hidden="true"></i>
-        {{message}}
-    </h3>
-
-    <div class="cover_speech">
-        <div class="text">
-            <p-scrollPanel [style]="{width: '100%', height: '80px'}">
-                {{result!.script}}
-            </p-scrollPanel>
+    <div class="result" style="width: 45%; float:right">
+        <div style="width: 65%; float:left">
+            <h1>Speech Recognition</h1>
         </div>
-    </div>
-    <h1>Result</h1>
-    <div class="cover_timestamp">
-        <div class="text">
-            <p-scrollPanel [style]="{width: '100%', height: '105px'}">
-                <div *ngFor="let transcript of getTranscriptions()">
-                    <div style="width: 60%; float:left">
-                        <td>{{transcript.transcript}}</td>
-                    </div>
-                    <div style="width: 25%; float:right">
-                        <td class="timestamp">{{transcript.start_time.toFixed(2) +" - "+ transcript.end_time.toFixed(2)}}</td>
-                    </div>
-                </div>
-                <div class="noResult" *ngIf="noResult">
-                    ไม่สามารถตรวจจับคำพูดได้
-                </div>
-            </p-scrollPanel>
-        </div>
-    </div>
-    <h1>Detected sounds</h1>
-    <div class="cover_detect">
-        <div class="text">
-            <p-scrollPanel [style]="{width: '100%', height: '105px'}">
-                <div *ngFor="let array of result!.class let i = index">
-                    <div style="width: 65%; float:left">
-                        <td>{{result!.class[i]}}</td>
-                    </div>
-                    <div style="width: 25%; float:right">
-                        <td class="timestamp">{{result!.start_time[i].toFixed(2)}}</td>
-                    </div>
-                </div>
-            </p-scrollPanel>
-        </div>
-    </div>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <h3 (click)="copyMessage()">
+            <i *ngIf="!this.isCopy" class="fa fa-clipboard" aria-hidden="true"></i>
+            <i *ngIf="this.isCopy" class="fa fa-check" aria-hidden="true"></i>
+            {{message}}
+        </h3>
 
-</div>
+        <div class="cover_speech">
+            <div class="text">
+                <p-scrollPanel [style]="{width: '100%', height: '80px'}">
+                    {{result!.script}}
+                </p-scrollPanel>
+            </div>
+        </div>
+        <h1>Result</h1>
+        <div class="cover_timestamp">
+            <div class="text">
+                <p-scrollPanel [style]="{width: '100%', height: '105px'}">
+                    <div *ngFor="let transcript of getTranscriptions()">
+                        <div style="width: 60%; float:left">
+                            <td>{{transcript.transcript}}</td>
+                        </div>
+                        <div style="width: 25%; float:right">
+                            <td class="timestamp">{{transcript.start_time.toFixed(2) +" - "+
+                                transcript.end_time.toFixed(2)}}</td>
+                        </div>
+                    </div>
+                    <div class="noResult" *ngIf="noResult">
+                        ไม่สามารถตรวจจับคำพูดได้
+                    </div>
+                </p-scrollPanel>
+            </div>
+        </div>
+        <h1>Detected sounds</h1>
+        <div class="cover_detect">
+            <div class="text">
+                <p-scrollPanel [style]="{width: '100%', height: '105px'}">
+                    <div *ngFor="let array of result!.class let i = index">
+                        <div style="width: 65%; float:left">
+                            <td>{{result!.class[i]}}</td>
+                        </div>
+                        <div style="width: 25%; float:right">
+                            <td class="timestamp">{{result!.start_time[i].toFixed(2)}}</td>
+                        </div>
+                    </div>
+                </p-scrollPanel>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <div class="error" *ngIf="this.isError">
-    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" color="#FB9823" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-      </svg>
-    <h1 style="font-size: 65px" >404 Error</h1>
-    <h2 style="font-size: 30px" >Page not found</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" color="#FB9823" fill="currentColor"
+        class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+        <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </svg>
+    <h1 style="font-size: 65px">404 Error</h1>
+    <h2 style="font-size: 30px">Page not found</h2>
     The Page you are looking for doesn't exist or an otber error occurred.<br>
     Please go back, or head over to homepage to choose a new direction.<br>
     <br><br>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <a href="/Home" class="home" (click)="again()"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Go back to our homepage</a>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <a href="/Home" class="home" (click)="again()"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Go back to our
+        homepage</a>
 </div>

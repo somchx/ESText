@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -22,7 +22,11 @@ export class ApiService {
     return this.http.get<Result>(this.baseUrl + "/clear")
   }
   getVideo():Observable<Blob>{
-    return this.http.get(this.baseUrl + '/video', {responseType: 'blob'});
+    const headers = new HttpHeaders({
+      'Cache-Control':'no-cache',
+      'Pragma' :'no-cache',
+    })
+    return this.http.get(this.baseUrl + '/video', {responseType: 'blob',headers:headers});
   }
   errorHandler(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

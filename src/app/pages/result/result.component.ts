@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiService, Prediction, Result } from '../../services/api.service';
 import { DownloadService } from 'src/app/services/download.service';
+import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -15,25 +16,49 @@ export class ResultComponent implements OnInit {
   isError : boolean = false;
   errorMsg : string = ''
   noResult : boolean= false;
+  isStart = false;
+  res: Observable<null | string> = of(null);
+  loadingPercent = 0;
+  intervalId = {} as any;
   constructor(private http: HttpClient, private api: ApiService, private downloads: DownloadService) { }
 
   ngOnInit(): void {
-    
     this.blockedDocument = true;
+    this.startLoading()
     this.api.getProcess().subscribe(response => {
-      this.result = response
-      console.log(response)
-      this.video()
-      console.log('this.result.class '+this.result.class)
-      console.log(this.result.start_time)
-      if(this.result.script == 'ไม่สามารถตรวจจับคำพูดได้'){
-        this.noResult = true;
-        console.log(this.noResult);
-      }
+      this.loadingPercent = 100;
+      
+      setTimeout(()=>{
+        this.result = response
+        
+        console.log(response)
+        console.log('this.result.class '+this.result.class)
+        console.log(this.result.start_time)
+        if(this.result.script == 'ไม่สามารถตรวจจับคำพูดได้'){
+          this.noResult = true;
+          console.log(this.noResult);
+        }
+        this.video()
+      }, 2000)
     }, (err) => {
       this.errorMsg = err.message
       this.isError = true;
     });
+  }
+  startLoading() {
+    this.isStart = true;
+    this.intervalId = setInterval(() => {
+      if (this.loadingPercent < 98) {
+        this.loadingPercent += 1;
+      }
+    }, 550);
+  }
+  progressInLoading() {
+    if (this.loadingPercent === 100) {
+      clearInterval(this.intervalId);
+      this.res = of("Item Loaded");
+    }
+    console.log('Loading: ' + this.loadingPercent + '% completed.');
   }
   video(){
     this.api.getVideo().subscribe(response => {

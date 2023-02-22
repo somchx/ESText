@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ApiService, Process, Result } from '../../services/api.service';
+import { ApiService, Result } from '../../services/api.service';
 import { MessageService } from 'primeng/api';
-import { DownloadService } from 'src/app/services/download.service';
-import { Renderer2 } from '@angular/core'
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-uploadfile',
@@ -20,20 +19,35 @@ export class UploadfileComponent implements OnInit {
   isChoosed: boolean = false;
   isSpinner: boolean = false;
   file: any;
-  videoResult : any;
+  videoResult: any;
   format: string | undefined;
   url: string | ArrayBuffer | null | undefined;
   _videoStringUrl = ""
   urls: any = 'C:/Users/ADMIN/Desktop/API/result/result.mp4';
   error: any;
 
-  constructor(private api: ApiService,
-    private messageService: MessageService,
-    private downloads: DownloadService,
-    private renderer: Renderer2) { }
+  constructor(private api: ApiService,private messageService: MessageService) { }
+  isStart = false;
+  res: Observable<null | string> = of(null);
+  loadingPercent = 0;
+  intervalId = {} as any;
 
   ngOnInit() { }
-
+  startLoading() {
+    this.isStart = true;
+    this.intervalId = setInterval(() => {
+      if (this.loadingPercent < 99) {
+        this.loadingPercent += 1;
+      }
+    }, 550);
+  }
+  progressInLoading() {
+    if (this.loadingPercent === 100) {
+      clearInterval(this.intervalId);
+      this.res = of("Item Loaded");
+    }
+    console.log('Loading: ' + this.loadingPercent + '% completed.');
+  }
   again(): void {
     this.api.getAgain().subscribe(response => {
       console.log(response)
@@ -80,8 +94,10 @@ export class UploadfileComponent implements OnInit {
   }
 
   upload() {
+    
     this.isSpinner = true;
     this.api.upload(this.file).subscribe(response => {
+     
       console.log(response)
       this.messageService.add({
         key: 'tr', severity: 'success',
