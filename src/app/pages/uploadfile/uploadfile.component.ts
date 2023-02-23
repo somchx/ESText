@@ -22,16 +22,14 @@ export class UploadfileComponent implements OnInit {
   videoResult: any;
   format: string | undefined;
   url: string | ArrayBuffer | null | undefined;
-  _videoStringUrl = ""
-  urls: any = 'C:/Users/ADMIN/Desktop/API/result/result.mp4';
   error: any;
-
-  constructor(private api: ApiService,private messageService: MessageService) { }
   isStart = false;
   res: Observable<null | string> = of(null);
   loadingPercent = 0;
   intervalId = {} as any;
 
+  constructor(private api: ApiService,private messageService: MessageService) { }
+ 
   ngOnInit() { }
   startLoading() {
     this.isStart = true;
@@ -94,15 +92,14 @@ export class UploadfileComponent implements OnInit {
   }
 
   upload() {
-    
     this.isSpinner = true;
     this.api.upload(this.file).subscribe(response => {
-     
       console.log(response)
       this.messageService.add({
         key: 'tr', severity: 'success',
         summary: 'The file is uploaded', detail: this.file.name + " is uploaded."
       });
+      
       this.isUpload = true;
       this.isChoosed = false;
       this.resetFileUploader()

@@ -101,6 +101,9 @@
                             <td class="timestamp">{{result!.start_time[i].toFixed(2)}}</td>
                         </div>
                     </div>
+                    <div class="noResult" *ngIf="noEnvi">
+                        ไม่สามารถตรวจจับเสียงสภาพแวดล้อมได้
+                    </div>
                 </p-scrollPanel>
             </div>
         </div>

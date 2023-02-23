@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Prediction, Result } from '../../services/api.service';
+import { ApiService, Result } from '../../services/api.service';
 import { DownloadService } from 'src/app/services/download.service';
 import { Observable, of } from 'rxjs';
 @Component({
@@ -16,6 +16,7 @@ export class ResultComponent implements OnInit {
   isError : boolean = false;
   errorMsg : string = ''
   noResult : boolean= false;
+  noEnvi : boolean= false;
   isStart = false;
   res: Observable<null | string> = of(null);
   loadingPercent = 0;
@@ -27,15 +28,17 @@ export class ResultComponent implements OnInit {
     this.startLoading()
     this.api.getProcess().subscribe(response => {
       this.loadingPercent = 100;
-      
       setTimeout(()=>{
         this.result = response
-        
         console.log(response)
         console.log('this.result.class '+this.result.class)
         console.log(this.result.start_time)
         if(this.result.script == 'ไม่สามารถตรวจจับคำพูดได้'){
           this.noResult = true;
+          console.log(this.noResult);
+        }
+        if(this.result.class.length == 0){
+          this.noEnvi = true;
           console.log(this.noResult);
         }
         this.video()
@@ -89,8 +92,7 @@ export class ResultComponent implements OnInit {
     }
     catch(e) {
       this.noResult = true;
-      console.log(this.noResult);
-      console.log(e);
+      // console.log(this.noResult);
     }  
   }
   again(): void {
@@ -98,8 +100,6 @@ export class ResultComponent implements OnInit {
       this.noResult = false;
     });
   }
-
- 
   download(): void {
     this.downloads
       .download('http://127.0.0.1:5000/get_file/result.zip')
@@ -112,7 +112,6 @@ export class ResultComponent implements OnInit {
         URL.revokeObjectURL(objectUrl);
       })
   }
- 
   video_download(): void {
     this.downloads
       .download('http://127.0.0.1:5000/get_video/video.mp4')

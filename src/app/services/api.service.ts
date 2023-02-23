@@ -47,6 +47,7 @@ export interface Process {
   name: string
   directory: string
   size: number
+  time : number
 }
 
 export interface Result{
