@@ -52,11 +52,12 @@ export interface Process {
 
 export interface Result{
   class: any
-  link : string
+  filename : string
   transcription : SpeechRecTranscription
   script : string
   start_time : any
   end_time : number
+
 }
 export interface SpeechRecTranscription{
   data : SpeechRecData

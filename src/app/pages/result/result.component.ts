@@ -17,6 +17,7 @@ export class ResultComponent implements OnInit {
   errorMsg : string = ''
   noResult : boolean= false;
   noEnvi : boolean= false;
+  filename : string = ''
   isStart = false;
   res: Observable<null | string> = of(null);
   loadingPercent = 0;
@@ -31,6 +32,7 @@ export class ResultComponent implements OnInit {
       setTimeout(()=>{
         this.result = response
         console.log(response)
+        this.filename = response.filename
         console.log('this.result.class '+this.result.class)
         console.log(this.result.start_time)
         if(this.result.script == 'ไม่สามารถตรวจจับคำพูดได้'){
