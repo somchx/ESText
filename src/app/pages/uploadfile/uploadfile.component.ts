@@ -23,29 +23,15 @@ export class UploadfileComponent implements OnInit {
   format: string | undefined;
   url: string | ArrayBuffer | null | undefined;
   error: any;
-  isStart = false;
-  res: Observable<null | string> = of(null);
-  loadingPercent = 0;
-  intervalId = {} as any;
+  students = ['val1','val2','valn'] 
 
-  constructor(private api: ApiService,private messageService: MessageService) { }
- 
-  ngOnInit() { }
-  startLoading() {
-    this.isStart = true;
-    this.intervalId = setInterval(() => {
-      if (this.loadingPercent < 99) {
-        this.loadingPercent += 1;
-      }
-    }, 550);
+  constructor(private api: ApiService, private messageService: MessageService) { }
+
+
+  ngOnInit() { 
+    // this.video()
   }
-  progressInLoading() {
-    if (this.loadingPercent === 100) {
-      clearInterval(this.intervalId);
-      this.res = of("Item Loaded");
-    }
-    console.log('Loading: ' + this.loadingPercent + '% completed.');
-  }
+
   again(): void {
     this.api.getAgain().subscribe(response => {
       console.log(response)
@@ -90,7 +76,6 @@ export class UploadfileComponent implements OnInit {
       this.isVideo = true;
     }
   }
-
   upload() {
     this.isSpinner = true;
     this.api.upload(this.file).subscribe(response => {
@@ -99,7 +84,7 @@ export class UploadfileComponent implements OnInit {
         key: 'tr', severity: 'success',
         summary: 'The file is uploaded', detail: this.file.name + " is uploaded."
       });
-      
+
       this.isUpload = true;
       this.isChoosed = false;
       this.resetFileUploader()
@@ -127,5 +112,11 @@ export class UploadfileComponent implements OnInit {
     this.fileUploader.nativeElement.value = null;
     this.isChoosed = false;
   }
-
+  video(){
+    this.api.getVideo().subscribe(response => {
+    console.log(response)
+    const video = document.getElementById("vdo") as HTMLVideoElement 
+    video.src = window.URL.createObjectURL(response)
+    })
+  }
 }

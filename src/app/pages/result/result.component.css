@@ -29,6 +29,7 @@ h1 {
     line-height: 24px;
 }
 
+
 .spinner {
     margin: 0;
     position: absolute;
@@ -75,7 +76,14 @@ video {
     color: white;
 }
 .timestamp{
-    color: 939393;
+    text-decoration: underline #616161 ;  
+    color: #616161;
+}
+.timestamp:hover{
+    color: #1a457e;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    font-weight: bold;
+    background-color: yellow;
 }
 button {
     cursor: pointer;

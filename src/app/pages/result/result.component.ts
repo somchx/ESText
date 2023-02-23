@@ -126,4 +126,18 @@ export class ResultComponent implements OnInit {
         URL.revokeObjectURL(objectUrl);
       })
   }
+  rowSelect(i: number) {
+    const time = this.result.start_time[i]
+    console.log(this.result.start_time[i]);
+    this.setCurTime(time);
+  }
+  rowTransc(i : number) {
+    const time = this.result.transcription.data.results[0].predictions[i].start_time
+    console.log();
+    this.setCurTime(time);
+  }
+  setCurTime(stamp: any) { 
+    const vid = document.getElementById("vdo") as HTMLVideoElement ;
+    vid.currentTime=stamp;
+  } 
 }

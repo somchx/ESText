@@ -1,5 +1,5 @@
-<div *ngIf="!result?.class && !this.isError " >
-    
+<div *ngIf="!result?.class && !this.isError ">
+
     <p-blockUI [blocked]="blockedDocument"></p-blockUI>
     <div class="nav">
         <app-navbar></app-navbar>
@@ -9,12 +9,14 @@
     <h2>Working on process, Don't close this windows while processing</h2>
     <div class="spinner">
 
-        <p-progressSpinner *ngIf="this.loadingPercent<100" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
-            fill="var(--surface-ground)" animationDuration=".8s"></p-progressSpinner>
-        <p-progressSpinner *ngIf="this.loadingPercent===100" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
-            fill="var(--surface-ground)" animationDuration=".25s"></p-progressSpinner>
+        <p-progressSpinner *ngIf="this.loadingPercent<100" [style]="{width: '50px', height: '50px'}"
+            styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)"
+            animationDuration=".8s"></p-progressSpinner>
+        <p-progressSpinner *ngIf="this.loadingPercent===100" [style]="{width: '50px', height: '50px'}"
+            styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)"
+            animationDuration=".25s"></p-progressSpinner>
         <br>
-        
+
     </div>
     <span>Please wait... {{loadingPercent}} %</span>
 </div>
@@ -74,13 +76,15 @@
         <div class="cover_timestamp">
             <div class="text">
                 <p-scrollPanel [style]="{width: '100%', height: '105px'}">
-                    <div *ngFor="let transcript of getTranscriptions()">
-                        <div style="width: 60%; float:left">
-                            <td>{{transcript.transcript}}</td>
-                        </div>
-                        <div style="width: 25%; float:right">
-                            <td class="timestamp">{{transcript.start_time.toFixed(2) +" - "+
-                                transcript.end_time.toFixed(2)}}</td>
+                    <div *ngFor="let transcript of getTranscriptions() let i = index" (click)="rowTransc(i)">
+                        <div class="custom-color">
+                            <div style="width: 60%; float:left">
+                                <td>{{transcript.transcript}}</td>
+                            </div>
+                            <div style="width: 25%; float:right">
+                                <td class="timestamp">{{transcript.start_time.toFixed(2) +" - "+
+                                    transcript.end_time.toFixed(2)}}</td>
+                            </div>
                         </div>
                     </div>
                     <div class="noResult" *ngIf="noResult">
@@ -93,13 +97,15 @@
         <div class="cover_detect">
             <div class="text">
                 <p-scrollPanel [style]="{width: '100%', height: '105px'}">
-                    <div *ngFor="let array of result!.class let i = index">
+                    <div *ngFor="let array of result!.class let i = index" (click)="rowSelect(i)">
+                        <!-- <tr *ngFor="let student of result!.class let i = index" (click)="rowSelect(i)"> -->
                         <div style="width: 65%; float:left">
                             <td>{{result!.class[i]}}</td>
                         </div>
                         <div style="width: 25%; float:right">
                             <td class="timestamp">{{result!.start_time[i].toFixed(2)}}</td>
                         </div>
+                        <!-- </tr> -->
                     </div>
                     <div class="noResult" *ngIf="noEnvi">
                         ไม่สามารถตรวจจับเสียงสภาพแวดล้อมได้
