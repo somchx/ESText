@@ -2,47 +2,9 @@
     font-family: 'Inter', sans-serif;
 }
 
-html,
-body {
-    background-color: #E5F2FF;
-    margin: 0;
-}
-
-p {
-    font-weight: bold;
-    font-size: 36px;
-    color: #000;
-    text-decoration: none;
-    text-align: center;
-}
-
-h2 {
-    font-weight: 500;
-    font-size: 16px;
-    text-align: center;
-}
-
 div {
     width: 100%;
     text-align: center;
-}
-#red{
-    margin: 12px;
-    cursor: pointer;
-    padding: 12px 28px;
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-    border-radius: 12px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    background-color: #bc1a1a;
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    color: white;
-    transition-duration: 0.4s;
-    right: 0px; 
 }
 
 button {
@@ -70,21 +32,10 @@ button:hover {
     color: white;
 }
 
-
-button[disabled] {
-    background-color: #cccccc;
-    color: #666666;
-}
-
-body {
-    margin: 0px 60px;
-}
-
 .drop-container {
     margin: 0px 300px;
     position: relative;
     display: flex;
-    gap: 10px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -101,18 +52,6 @@ body {
 .drop-container:hover {
     background: #eee;
     border-color: #111;
-}
-
-.drop-container:hover .drop-title {
-    color: #222;
-}
-
-.drop-title {
-    color: #444;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    transition: color .2s ease-in-out;
 }
 
 input[type=file] {
@@ -142,28 +81,11 @@ input[type=file]::file-selector-button:hover {
     background-color: #2864B0;
 }
 
-.cover {
-    position: absolute;
-    width: 765px;
-    left: 336px;
-    top: 212px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    height: 444px;
-    background: #D9D9D9;
-    border-radius: 10px;
-}
 .box{
     position: absolute;
-    width: 765px;
+    width: 750px;
     left: 336px;
     background: #D9D9D9;
     border-radius: 10px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-.result{
-    font-size: 15px;
-    padding-top: 2.5%;
-}
-.icon{
-    vertical-align: middle;
 }

@@ -1,13 +1,14 @@
 <div class="nav">
     <app-navbar></app-navbar>
 </div>
-<body>
-    <p>FileUpload
-        <br><h2>Only audio and video files may be uploaded.</h2>
+
+<body style="margin: 0px 60px;  background-color: #E5F2FF;">
+    <p style="font-weight: bold; font-size: 36px;color: #000;text-decoration: none;text-align: center;">FileUpload
+        <br><h2 style="font-weight: 500;font-size: 16px; text-align: center;">Only audio and video files may be uploaded.</h2>
     </p>
-    <div class="cover"></div>
+    <div class="cover" style="position: absolute; width: 750px;left: 336px; top: 212px; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));height: 444px;background: #D9D9D9;border-radius: 10px;"></div>
     <div>
-        <label for="images" class="drop-container">
+        <label for="images" class="drop-container" style=" color: #444;font-size: 20px;font-weight: bold;text-align: center; transition: color .2s ease-in-out;">
             <span class="drop-title">Drop file here</span>
             or
             <input #fileUploader type="file" id="images" accept="audio/*,video/*" (change)="chooseFile($event)">
@@ -22,12 +23,12 @@
     <div class="box" *ngIf="this.isChoosed">
         <br>
         <div>
-         <video [src]="url" *ngIf="this.isVideo" height="200" controls></video>   
-         <video [src]="url" *ngIf="!this.isVideo" height="50" width="350" controls></video>
+            <video [src]="url" *ngIf="this.isVideo" height="200" controls></video>
+            <video [src]="url" *ngIf="!this.isVideo" height="50" width="350" controls></video>
         </div>
-        
-        <div class="result" style="width: 62%; float:left">
-            <span class="icon">
+
+        <div class="result" style="width: 62%; float:left; font-size: 15px; padding-top: 2.5%;">
+            <span class="icon" style="vertical-align: middle;">
                 <svg *ngIf="this.isVideo" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
                     class="bi bi-file-earmark-play" viewBox="0 0 16 16">
                     <path
@@ -45,10 +46,12 @@
             </span>
             {{status}}
         </div>
-        <div style="width: 38%; float:right"> 
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <div style="width: 38%; float:right">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <button (click)="upload()"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
-            <button id="red" (click)="resetFileUploader()"><i class="fa fa-trash-o fa-lg"></i> Clear</button>
+            <button style="background-color: #bc1a1a;" (click)="resetFileUploader()"><i class="fa fa-trash-o fa-lg"></i>
+                Clear</button>
         </div>
     </div>
     <a class="link" href="/Result">

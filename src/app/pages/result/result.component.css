@@ -3,14 +3,6 @@
 
 }
 
-p {
-    font-weight: bold;
-    font-size: 36px;
-    color: #167107;
-    text-decoration: none;
-    text-align: center;
-}
-
 h2,h3 {
     font-weight: 500;
     font-size: 16px;
@@ -30,46 +22,7 @@ h1 {
 }
 
 
-.spinner {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-}
-span {
-    margin: 0;
-    position: absolute;
-    top: 58%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-}
-video {
-    padding-left: 6%;
-    padding-top: 2%;
-}
 
-.again {
-    margin-top: 5%;
-    margin-left: 48%;
-}
-
-.cover {
-    position: absolute;
-    width: 565px;
-    height: 385px;
-    left: 100px;
-    background: #D9D9D9;
-    border-radius: 10px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.again-button {
-    background-color: #167107;
-    
-  }
 .again-button:hover {
     cursor: pointer;
     background-color: #1d910c;
@@ -99,7 +52,6 @@ button {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     color: white;
-
 }
 
 button:hover {
@@ -113,31 +65,7 @@ button:hover {
     padding-left: 100px;
 }
 
-.title {
-    margin-left: 40px;
-}
-
-.subtitle {
-    margin-left: 100px;
-}
-
-.cover_speech{
-    width: 565px;
-    height: 95px;
-    left: 100px;
-    background: #D9D9D9;
-    border-radius: 10px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-.cover_detect {
-    width: 565px;
-    height: 135px;
-    left: 100px;
-    background: #D9D9D9;
-    border-radius: 10px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-.cover_timestamp{
+.cover_speech,.cover_detect ,.cover_timestamp{
     width: 565px;
     height: 135px;
     left: 100px;
@@ -148,10 +76,7 @@ button:hover {
 .text{
     padding: 12px;
 }
-.error{
-    text-align: center ;
-    padding : 200px 0;
-}
+
 .home {
     background-color: #4CAF50;
     border: none;
@@ -164,9 +89,6 @@ button:hover {
     margin: 4px 2px;
     cursor: pointer;
   }
-  :host ::ng-deep .custom-spinner .p-progress-spinner-circle {
-    animation: custom-progress-spinner-dash 1.5s ease-in-out infinite, custom-progress-spinner-color 6s ease-in-out infinite;
-}
 
 @keyframes custom-progress-spinner-color {
     100%,
@@ -177,7 +99,7 @@ button:hover {
         stroke: #489FB5;
     }
     66% {
-        stroke: #82C0CC;
+        stroke: #ccc282;
     }
     80%,
     90% {
@@ -185,17 +107,3 @@ button:hover {
     }
 }
 
-@keyframes custom-progress-spinner-dash {
-    0% {
-        stroke-dasharray: 1, 200;
-        stroke-dashoffset: 0;
-    }
-    50% {
-        stroke-dasharray: 89, 200;
-        stroke-dashoffset: -35px;
-    }
-    100% {
-        stroke-dasharray: 89, 200;
-        stroke-dashoffset: -124px;
-    }
-}

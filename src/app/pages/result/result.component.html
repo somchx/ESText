@@ -7,7 +7,7 @@
     <br>
     <h1 style="text-align: center; font-size: 30px;">Processing...</h1>
     <h2>Working on process, Don't close this windows while processing</h2>
-    <div class="spinner">
+    <div class="spinner" style="  margin: 0;position: absolute;top: 50%;left: 50%; margin-right: -50%;transform: translate(-50%, -50%)">
 
         <p-progressSpinner *ngIf="this.loadingPercent<100" [style]="{width: '50px', height: '50px'}"
             styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)"
@@ -18,22 +18,22 @@
         <br>
 
     </div>
-    <span>Please wait... {{loadingPercent}} %</span>
+    <span style=" margin: 0;position: absolute; top: 58%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%)">Please wait... {{loadingPercent}} %</span>
 </div>
 
 <div *ngIf="result?.class">
     <div class="nav">
         <app-navbar></app-navbar>
     </div>
-    <p>Processing Completion!
+    <p style=" font-weight: bold;font-size: 36px;color: #167107;text-decoration: none;text-align: center;">Processing Completion!
         <br><h2>You can download and copy the results of the processing.</h2>
     </p>
     <div class="video" style="width: 35%; float:left">
-        <div class="subtitle">
+        <div class="subtitle" style="margin-left: 100px;">
             <h1>Video + Subtitle</h1>
         </div>
-        <div class="cover">
-            <div class="title" style="width: 55%; float:left">
+        <div class="cover" style=" position: absolute;width: 565px;height: 385px;left: 100px;background: #D9D9D9;border-radius: 10px;filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+            <div class="title" style="width: 55%; float:left;margin-left: 40px;">
                 <br>
                 <h1>{{filename}}.mp4</h1>
             </div>
@@ -41,12 +41,12 @@
                 <br>
                 <button (click)="video_download()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
             </div>
-            <video id="vdo" height="272" width="520" controls></video>
+            <video id="vdo" height="272" width="520" controls style=" padding-left: 6%; padding-top: 2%;"></video>
             <div style="padding-top: 80px;">
                 <button (click)="download()"><i class="fa fa-download" aria-hidden="true"></i> Download All</button>
                 <div style="width: 33%; float:right">
                     <a class="link" href="/FileUpload">
-                        <button class="again-button" (click)="again()"><i class="fa fa-refresh" aria-hidden="true"></i>
+                        <button class="again-button" (click)="again()" style=" background-color: #167107;"><i class="fa fa-refresh" aria-hidden="true"></i>
                             Get process again</button>
                     </a>
                 </div>
@@ -65,7 +65,7 @@
             {{message}}
         </h3>
 
-        <div class="cover_speech">
+        <div class="cover_speech" style="height: 95px;">
             <div class="text">
                 <p-scrollPanel [style]="{width: '100%', height: '80px'}">
                     {{result!.script}}
@@ -117,7 +117,7 @@
     </div>
 </div>
 
-<div class="error" *ngIf="this.isError">
+<div class="error" *ngIf="this.isError" style="text-align: center ;padding : 200px 0;">
     <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" color="#FB9823" fill="currentColor"
         class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
         <path
