@@ -3,17 +3,20 @@
 
 }
 
-h2,h3 {
+h2,
+h3 {
     font-weight: 500;
     font-size: 16px;
     text-align: center;
     color: #000000;
-    
+
 }
-h3{
+
+h3 {
     cursor: pointer;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
+
 h1 {
     font-style: normal;
     font-weight: 600;
@@ -28,16 +31,19 @@ h1 {
     background-color: #1d910c;
     color: white;
 }
-.timestamp{
-    text-decoration: underline #616161 ;  
+
+.timestamp {
+    text-decoration: underline #616161;
     color: #616161;
 }
-.timestamp:hover{
+
+.timestamp:hover {
     color: #1a457e;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     font-weight: bold;
     background-color: yellow;
 }
+
 button {
     cursor: pointer;
     padding: 12px 28px;
@@ -64,8 +70,62 @@ button:hover {
     margin-top: 70px;
     padding-left: 100px;
 }
+.spinner{
+    margin: 0;position: absolute;top: 50%;left: 50%; margin-right: -50%;transform: translate(-50%, -50%)
+}
+.title {
+    width: 55%;
+    float: left;
+    margin-left: 40px;
+}
 
-.cover_speech,.cover_detect ,.cover_timestamp{
+.video {
+    width: 35%;
+    float: left
+}
+
+span {
+    margin: 0;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+video {
+    height: 272px;
+    width: 520px;
+    padding-left: 6%;
+    padding-top: 2%;
+}
+
+p {
+    font-weight: bold;
+    font-size: 36px;
+    color: #167107;
+    text-decoration: none;
+    text-align: center;
+}
+
+.error {
+    text-align: center;
+    padding: 200px 0;
+}
+
+.cover {
+    position: absolute;
+    width: 565px;
+    height: 385px;
+    left: 100px;
+    background: #D9D9D9;
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.cover_speech,
+.cover_detect,
+.cover_timestamp {
     width: 565px;
     height: 135px;
     left: 100px;
@@ -73,7 +133,8 @@ button:hover {
     border-radius: 10px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-.text{
+
+.text {
     padding: 12px;
 }
 
@@ -88,22 +149,25 @@ button:hover {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-  }
+}
 
 @keyframes custom-progress-spinner-color {
+
     100%,
     0% {
         stroke: #16697A;
     }
+
     40% {
         stroke: #489FB5;
     }
+
     66% {
         stroke: #ccc282;
     }
+
     80%,
     90% {
         stroke: #FFA62B;
     }
 }
-

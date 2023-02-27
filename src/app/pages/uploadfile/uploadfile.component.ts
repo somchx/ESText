@@ -19,17 +19,17 @@ export class UploadfileComponent implements OnInit {
   isChoosed: boolean = false;
   isSpinner: boolean = false;
   file: any;
+  attachedFile: any;
   videoResult: any;
   format: string | undefined;
   url: string | ArrayBuffer | null | undefined;
   error: any;
-  students = ['val1','val2','valn'] 
+  durationText: any;
 
   constructor(private api: ApiService, private messageService: MessageService) { }
 
 
-  ngOnInit() { 
-    // this.video()
+  ngOnInit() {
   }
 
   again(): void {
@@ -42,8 +42,20 @@ export class UploadfileComponent implements OnInit {
     this.isChoosed = true;
     this.isUpload = false;
     this.file = event.target.files && event.target.files[0];
-
     console.log(this.file)
+    const audio = new Audio();
+    audio.src = URL.createObjectURL(event.target.files[0]);
+    audio.onloadedmetadata = () => {
+      if (audio.duration > 300){
+        this.messageService.add({
+          key: 'tr', severity: 'warn',
+          summary: 'Warning', detail: "This file duration exceeds maximum limit. Maximum allowed file duration is 5 minutes."
+        });
+      }
+      console.log(audio.duration);
+      this.durationText = audio.duration;
+    };
+    
     if (this.file) {
       var reader = new FileReader();
       reader.readAsDataURL(this.file);
@@ -59,6 +71,7 @@ export class UploadfileComponent implements OnInit {
         this.isChoosed = false;
         this.resetFileUploader()
       }
+
       reader.onload = (event) => {
         this.url = (<FileReader>event.target).result;
       }
@@ -78,6 +91,7 @@ export class UploadfileComponent implements OnInit {
   }
   upload() {
     this.isSpinner = true;
+
     this.api.upload(this.file).subscribe(response => {
       console.log(response)
       this.messageService.add({
@@ -112,11 +126,11 @@ export class UploadfileComponent implements OnInit {
     this.fileUploader.nativeElement.value = null;
     this.isChoosed = false;
   }
-  video(){
+  video() {
     this.api.getVideo().subscribe(response => {
-    console.log(response)
-    const video = document.getElementById("vdo") as HTMLVideoElement 
-    video.src = window.URL.createObjectURL(response)
+      console.log(response)
+      const video = document.getElementById("vdo") as HTMLVideoElement
+      video.src = window.URL.createObjectURL(response)
     })
   }
 }

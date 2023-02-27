@@ -2,6 +2,32 @@
     font-family: 'Inter', sans-serif;
 }
 
+p {
+    font-weight: bold;
+    font-size: 36px;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+
+body {
+    margin: 0px 60px;
+    background-color: #E5F2FF;
+}
+
+.result {
+    width: 62%;
+    float: left;
+    font-size: 15px;
+    padding-top: 2.5%;
+}
+
 div {
     width: 100%;
     text-align: center;
@@ -23,13 +49,24 @@ button {
     font-weight: bold;
     color: white;
     transition-duration: 0.4s;
-    right: 0px; 
+    right: 0px;
 }
 
 button:hover {
     cursor: pointer;
     background-color: #2864B0;
     color: white;
+}
+
+.cover {
+    position: absolute;
+    width: 750px;
+    left: 336px;
+    top: 212px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    height: 444px;
+    background: #D9D9D9;
+    border-radius: 10px;
 }
 
 .drop-container {
@@ -81,7 +118,7 @@ input[type=file]::file-selector-button:hover {
     background-color: #2864B0;
 }
 
-.box{
+.box {
     position: absolute;
     width: 750px;
     left: 336px;
