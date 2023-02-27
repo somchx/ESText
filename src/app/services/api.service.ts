@@ -1,15 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private baseUrl = 'http://127.0.0.1:5000'
   constructor(private http: HttpClient) { }
-  errorMessage = '';
-  num = 0;
   upload(file: any): Observable<Process> {
     const body = new FormData()
     body.append("", file)
@@ -40,7 +38,6 @@ export class ApiService {
       'Something bad happened; please try again later.');
   }
 }
-
 export interface Process {
   status(response: Process, status: any): unknown;
   type: string
@@ -49,7 +46,6 @@ export interface Process {
   size: number
   time : number
 }
-
 export interface Result{
   class: any
   filename : string

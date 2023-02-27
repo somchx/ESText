@@ -94,7 +94,6 @@ export class ResultComponent implements OnInit {
     }
     catch(e) {
       this.noResult = true;
-      // console.log(this.noResult);
     }  
   }
   again(): void {

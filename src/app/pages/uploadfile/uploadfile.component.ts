@@ -25,10 +25,11 @@ export class UploadfileComponent implements OnInit {
   url: string | ArrayBuffer | null | undefined;
   error: any;
   durationText: any;
-
+  minutes : any;
+  seconds : any;
   constructor(private api: ApiService, private messageService: MessageService) { }
 
-
+  
   ngOnInit() {
   }
 
@@ -52,11 +53,24 @@ export class UploadfileComponent implements OnInit {
           summary: 'Warning', detail: "This file duration exceeds maximum limit. Maximum allowed file duration is 5 minutes."
         });
       }
-      console.log(audio.duration);
       this.durationText = audio.duration;
+      
+      if(Math.floor(this.durationText / 60) >0){
+        this.minutes = '0'+Math.floor(this.durationText / 60); 
+        this.seconds = (this.durationText - this.minutes * 60).toFixed(0) +' minutes';
+      }
+      else{
+        this.minutes = Math.floor(this.durationText / 60);
+        this.seconds = (this.durationText - this.minutes * 60).toFixed(0) +' seconds';
+      }
+      
+      console.log(this.durationText);
+      console.log(this.minutes);
+      
     };
     
     if (this.file) {
+      
       var reader = new FileReader();
       reader.readAsDataURL(this.file);
       if (this.file.type.indexOf('audio') > -1) {
@@ -77,7 +91,9 @@ export class UploadfileComponent implements OnInit {
       }
     }
     if (this.file.size <= 1000000) {
-      this.status = 'File chosen : ' + this.file.name + '   ' + (this.file.size / 1000).toFixed(2) + ' KB';
+      this.status = 'File chosen : ' + 
+      this.file.name + '   ' + 
+      (this.file.size / 1000).toFixed(2) + ' KB'
     }
     else if (this.file.size == 1000000 || this.file.size <= 1000000000) {
       this.status = 'File chosen : ' + this.file.name + '   ' + (this.file.size / 1000000).toFixed(2) + ' MB';
@@ -91,14 +107,12 @@ export class UploadfileComponent implements OnInit {
   }
   upload() {
     this.isSpinner = true;
-
     this.api.upload(this.file).subscribe(response => {
       console.log(response)
       this.messageService.add({
         key: 'tr', severity: 'success',
         summary: 'The file is uploaded', detail: this.file.name + " is uploaded."
       });
-
       this.isUpload = true;
       this.isChoosed = false;
       this.resetFileUploader()
