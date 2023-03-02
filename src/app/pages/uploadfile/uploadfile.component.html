@@ -8,7 +8,7 @@
     </p>
     <div class="cover"></div>
     <div>
-        <label for="images" class="drop-container" >
+        <label for="images" class="drop-container">
             <span class="drop-title">Drop file here</span>
             or
             <input #fileUploader type="file" id="images" accept="audio/*,video/*" (change)="chooseFile($event)">
@@ -46,15 +46,31 @@
             {{status}} {{this.minutes + '.'}}{{this.seconds}}
         </div>
         <div style="width: 38%; float:right">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <button (click)="upload()"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
             <button style="background-color: #bc1a1a;" (click)="resetFileUploader()"><i class="fa fa-trash-o fa-lg"></i>
                 Clear</button>
         </div>
     </div>
+    <!-- <div style="width: 12rem;">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="value2">
+            <label for="float-input">E-mail</label>
+        </span>
+    </div>
+    <br>
+    <div style="width: 12rem; ">
+        <span class="p-float-label">
+            <p-password [(ngModel)]="value1" [feedback]="false" [toggleMask]="true"></p-password>
+            <label for="float-input">Password</label>
+        </span>
+    </div> -->
     <a class="link" href="/Result">
         <div class="button">
             <button *ngIf="this.isUpload">Get Process</button>
+
+
         </div>
     </a>
 </body>

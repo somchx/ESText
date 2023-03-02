@@ -12,7 +12,7 @@ export class ResultComponent implements OnInit {
   result!: Result;
   blockedDocument: boolean = false;
   isCopy: boolean = false;
-  message: string = 'Copy'
+  message: string = 'Copy without timestamp'
   isError : boolean = false;
   errorMsg : string = ''
   noResult : boolean= false;
@@ -74,7 +74,7 @@ export class ResultComponent implements OnInit {
   }
   copyMessage() {
     this.isCopy = true;
-    this.message = 'Copied'
+    this.message = 'Copied without timestamp'
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';

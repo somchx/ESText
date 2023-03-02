@@ -24,6 +24,9 @@ import { DividerModule} from 'primeng/divider';
 import { BlockUIModule } from 'primeng/blockui';
 import { CardModule } from 'primeng/card';
 import { ScrollPanelModule} from 'primeng/scrollpanel';
+import {InputTextModule} from 'primeng/inputtext';
+import {FormsModule} from '@angular/forms'
+import {PasswordModule} from 'primeng/password';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ResultComponent } from './pages/result/result.component';
@@ -65,7 +68,10 @@ import { SafePipe } from './pages/uploadfile/safePipe';
         BlockUIModule,
         CardModule,
         DividerModule,
-        ScrollPanelModule
+        ScrollPanelModule,
+        InputTextModule,
+        FormsModule,
+        PasswordModule
         
     ]
 })

@@ -27,6 +27,8 @@ export class UploadfileComponent implements OnInit {
   durationText: any;
   minutes : any;
   seconds : any;
+  value2 : any;
+  value1 : any;
   constructor(private api: ApiService, private messageService: MessageService) { }
 
   

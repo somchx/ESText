@@ -44,6 +44,11 @@ h1 {
     background-color: yellow;
 }
 
+  
+::ng-deep .p-divider{
+    color: #007ad9 !important;
+}
+
 button {
     cursor: pointer;
     padding: 12px 28px;
@@ -135,9 +140,14 @@ p {
 }
 
 .text {
-    padding: 12px;
+    padding-left: 25px;
+    padding-right: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
-
+td{
+    font-family: 'Kanit', sans-serif;
+}
 .home {
     background-color: #4CAF50;
     border: none;
