@@ -13,33 +13,34 @@ export class ResultComponent implements OnInit {
   blockedDocument: boolean = false;
   isCopy: boolean = false;
   message: string = 'Copy without timestamp'
-  isError : boolean = false;
-  errorMsg : string = ''
-  noResult : boolean= false;
-  noEnvi : boolean= false;
-  filename : string = ''
+  isError: boolean = false;
+  errorMsg: string = ''
+  noResult: boolean = false;
+  noEnvi: boolean = false;
+  filename: string = ''
   isStart = false;
   res: Observable<null | string> = of(null);
   loadingPercent = 0;
   intervalId = {} as any;
+  duraion: any;
   constructor(private http: HttpClient, private api: ApiService, private downloads: DownloadService) { }
 
   ngOnInit(): void {
     this.blockedDocument = true;
-    this.startLoading()
+    this.durationFunc()
     this.api.getProcess().subscribe(response => {
       this.loadingPercent = 100;
-      setTimeout(()=>{
+      setTimeout(() => {
         this.result = response
         console.log(response)
         this.filename = response.filename
-        console.log('this.result.class '+this.result.class)
+        console.log('this.result.class ' + this.result.class)
         console.log(this.result.start_time)
-        if(this.result.script == 'ไม่สามารถตรวจจับคำพูดได้'){
+        if (this.result.script == 'ไม่สามารถตรวจจับคำพูดได้') {
           this.noResult = true;
           console.log(this.noResult);
         }
-        if(this.result.class.length == 0){
+        if (this.result.class.length == 0) {
           this.noEnvi = true;
           console.log(this.noResult);
         }
@@ -50,13 +51,14 @@ export class ResultComponent implements OnInit {
       this.isError = true;
     });
   }
-  startLoading() {
+  startLoading(tm : number) {
     this.isStart = true;
+    console.log('startLoading : ',tm)
     this.intervalId = setInterval(() => {
       if (this.loadingPercent < 98) {
         this.loadingPercent += 1;
       }
-    }, 550);
+    }, tm);
   }
   progressInLoading() {
     if (this.loadingPercent === 100) {
@@ -65,11 +67,17 @@ export class ResultComponent implements OnInit {
     }
     console.log('Loading: ' + this.loadingPercent + '% completed.');
   }
-  video(){
+  video() {
     this.api.getVideo().subscribe(response => {
-    console.log(response)
-    const video = document.getElementById("vdo") as HTMLVideoElement 
-    video.src = window.URL.createObjectURL(response)
+      console.log(response)
+      const video = document.getElementById("vdo") as HTMLVideoElement
+      video.src = window.URL.createObjectURL(response)
+    })
+  }
+  durationFunc() {
+    this.api.getTime().subscribe(response => {
+      this.duraion = response.time*10
+      this.startLoading(this.duraion)
     })
   }
   copyMessage() {
@@ -88,13 +96,13 @@ export class ResultComponent implements OnInit {
     document.body.removeChild(selBox);
   }
   getTranscriptions(): any {
-    try{
+    try {
       this.result?.transcription.data.results[0].predictions!
       return this.result?.transcription.data.results[0].predictions!
     }
-    catch(e) {
+    catch (e) {
       this.noResult = true;
-    }  
+    }
   }
   again(): void {
     this.api.getAgain().subscribe(response => {
@@ -130,13 +138,13 @@ export class ResultComponent implements OnInit {
     console.log(this.result.start_time[i]);
     this.setCurTime(time);
   }
-  rowTransc(i : number) {
+  rowTransc(i: number) {
     const time = this.result.transcription.data.results[0].predictions[i].start_time
     console.log();
     this.setCurTime(time);
   }
-  setCurTime(stamp: any) { 
-    const vid = document.getElementById("vdo") as HTMLVideoElement ;
-    vid.currentTime=stamp;
-  } 
+  setCurTime(stamp: any) {
+    const vid = document.getElementById("vdo") as HTMLVideoElement;
+    vid.currentTime = stamp;
+  }
 }

@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://127.0.0.1:5000'
+  private baseUrl = 'http://127.0.0.1:5000/'
   constructor(private http: HttpClient) { }
   upload(file: any): Observable<Process> {
     const body = new FormData()
@@ -21,10 +21,21 @@ export class ApiService {
   }
   getVideo():Observable<Blob>{
     const headers = new HttpHeaders({
+      // 'Access-Control-Allow-Headers':'Content-Type',
+      // 'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
       'Cache-Control':'no-cache',
       'Pragma' :'no-cache',
     })
     return this.http.get(this.baseUrl + '/video', {responseType: 'blob',headers:headers});
+  }
+  getTime():Observable<Result>{
+    return this.http.get<Result>(this.baseUrl + "/duration")
+  }
+  postMail(email: any): Observable<Process> {
+    const body = new FormData()
+    body.append("", email)
+    return this.http.post<Process>(this.baseUrl + "/mail", email);
   }
   errorHandler(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -53,7 +64,7 @@ export interface Result{
   script : string
   start_time : any
   end_time : number
-
+  time: any
 }
 export interface SpeechRecTranscription{
   data : SpeechRecData
@@ -73,3 +84,7 @@ export interface Prediction{
   start_time : number
   transcript : string
 }
+function express() {
+  throw new Error('Function not implemented.');
+}
+

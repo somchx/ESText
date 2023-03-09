@@ -53,24 +53,25 @@
                 Clear</button>
         </div>
     </div>
-    <!-- <div style="width: 12rem;">
-        <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="value2">
+    <div>
+        <span style="position: absolute;left: 445px;">
+            ในกรณีที่ไฟล์มีขนาดใหญ่ระบบอาจใช้เวลาในการประมวลผลนานกว่าปกติ 
+            <br>หากท่านต้องการรับแจ้งเตือนเมื่อประมวลผลเสร็จ กรุณากรอก e-mail ด้านล่าง (ไม่จำเป็น)
+            
+        </span>
+        <br><br><br>
+        <span class="p-float-label" style="width: 12rem; position: absolute;left: 600px;">
+            <input #email id="float-input" type="text" pInputText [(ngModel)]="value2">
             <label for="float-input">E-mail</label>
         </span>
+        <br><br>
+        <a class="link" href="/Result">
+            <button (click)="sendMail(email.value)" href="/Result" >Get Process</button>
+        </a>  
     </div>
-    <br>
-    <div style="width: 12rem; ">
-        <span class="p-float-label">
-            <p-password [(ngModel)]="value1" [feedback]="false" [toggleMask]="true"></p-password>
-            <label for="float-input">Password</label>
-        </span>
-    </div> -->
-    <a class="link" href="/Result">
-        <div class="button">
-            <button *ngIf="this.isUpload">Get Process</button>
 
 
-        </div>
-    </a>
+
+   
+
 </body>

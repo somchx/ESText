@@ -49,10 +49,10 @@ export class UploadfileComponent implements OnInit {
     const audio = new Audio();
     audio.src = URL.createObjectURL(event.target.files[0]);
     audio.onloadedmetadata = () => {
-      if (audio.duration > 300){
+      if (audio.duration > 900){
         this.messageService.add({
           key: 'tr', severity: 'warn',
-          summary: 'Warning', detail: "This file duration exceeds maximum limit. Maximum allowed file duration is 5 minutes."
+          summary: 'Warning', detail: "This file duration exceeds maximum limit. Maximum allowed file duration is 15 minutes."
         });
       }
       this.durationText = audio.duration;
@@ -148,5 +148,11 @@ export class UploadfileComponent implements OnInit {
       const video = document.getElementById("vdo") as HTMLVideoElement
       video.src = window.URL.createObjectURL(response)
     })
+  }
+  sendMail(value : any){
+      console.log(value)
+      this.api.postMail(value).subscribe(response => {
+        console.log(response)
+      });
   }
 }
