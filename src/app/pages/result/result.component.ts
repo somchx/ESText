@@ -23,6 +23,8 @@ export class ResultComponent implements OnInit {
   loadingPercent = 0;
   intervalId = {} as any;
   duraion: any;
+  mailPage : boolean = false;
+
   constructor(private http: HttpClient, private api: ApiService, private downloads: DownloadService) { }
 
   ngOnInit(): void {
@@ -33,27 +35,37 @@ export class ResultComponent implements OnInit {
       setTimeout(() => {
         this.result = response
         console.log(response)
-        this.filename = response.filename
-        console.log('this.result.class ' + this.result.class)
-        console.log(this.result.start_time)
-        if (this.result.script == 'ไม่สามารถตรวจจับคำพูดได้') {
-          this.noResult = true;
-          console.log(this.noResult);
+        console.log(response.status)
+        if (response.status == 200) {
+          this.mailPage = true;
         }
-        if (this.result.class.length == 0) {
-          this.noEnvi = true;
-          console.log(this.noResult);
+        else if (response.status == 404) {
+          this.mailPage = true;
         }
-        this.video()
+        else {
+          this.mailPage = false;
+          this.filename = response.filename
+          console.log('this.result.class ' + this.result.class)
+          console.log(this.result.start_time)
+          if (this.result.script == 'ไม่สามารถตรวจจับคำพูดได้') {
+            this.noResult = true;
+            console.log(this.noResult);
+          }
+          if (this.result.class.length == 0) {
+            this.noEnvi = true;
+            console.log(this.noResult);
+          }
+          this.video()
+        }
       }, 2000)
     }, (err) => {
       this.errorMsg = err.message
       this.isError = true;
     });
   }
-  startLoading(tm : number) {
+  startLoading(tm: number) {
     this.isStart = true;
-    console.log('startLoading : ',tm)
+    console.log('startLoading : ', tm)
     this.intervalId = setInterval(() => {
       if (this.loadingPercent < 98) {
         this.loadingPercent += 1;
@@ -76,7 +88,7 @@ export class ResultComponent implements OnInit {
   }
   durationFunc() {
     this.api.getTime().subscribe(response => {
-      this.duraion = response.time*10
+      this.duraion = response.time * 10
       this.startLoading(this.duraion)
     })
   }

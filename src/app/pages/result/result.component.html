@@ -2,15 +2,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400&display=swap" rel="stylesheet">
-<div *ngIf="!result?.class && !this.isError ">
 
+
+<div *ngIf="!result?.class && !this.isError && !this.mailPage ">
     <p-blockUI [blocked]="blockedDocument"></p-blockUI>
     <div class="nav">
         <app-navbar></app-navbar>
     </div>
     <br>
     <h1 style="text-align: center; font-size: 30px;">Processing...</h1>
-    <h2>Working on process, Don't close this windows while processing</h2>
+    <h2 style="font-family: 'Kanit', sans-serif; font-size: 17px;">ระบบกำลังประมวลผล หากต้องการรอ กรุณาอย่าปิดหน้าต่างนี้</h2>
     <div class="spinner">
 
         <p-progressSpinner *ngIf="this.loadingPercent<100" [style]="{width: '50px', height: '50px'}"
@@ -24,13 +25,12 @@
     </div>
     <span>Please wait... {{loadingPercent}} %</span>
 </div>
-
-<div *ngIf="result?.class">
+<div *ngIf="result?.class && !this.mailPage">
 <div class="nav">
     <app-navbar></app-navbar>
 </div>
 <p>Processing Completion!
-    <br><h2>You can download and copy the results of the processing.</h2>
+    <br><h2 style="font-family: 'Kanit', sans-serif; font-size: 17px ;">ระบบประมวลผลเสร็จสิ้น ท่านสามารถกดปุ่ม download all เพื่อบันทึกผลลัพธ์ทั้งหมดได้</h2>
 </p>
 <div class="video">
     <div class="subtitle" style="margin-left: 100px;">
@@ -125,8 +125,7 @@
 
 </div>
 </div>
-
-<div class="error" *ngIf="this.isError">
+<div class="error" *ngIf="this.isError && !this.mailPage">
     <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" color="#FB9823" fill="currentColor"
         class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
         <path
@@ -134,10 +133,27 @@
     </svg>
     <h1 style="font-size: 65px">404 Error</h1>
     <h2 style="font-size: 30px">Page not found</h2>
-    The Page you are looking for doesn't exist or an otber error occurred.<br>
-    Please go back, or head over to homepage to choose a new direction.<br>
-    <br><br>
+
+    <h2 style="font-family: 'Kanit', sans-serif; font-size: 17px;" >
+        ขออภัย ขณะนี้เกิดข้อผิดพลาดในการประมวลผลของระบบ<br>
+        กรุณากดปุ่ม ‘Go back to homepage’ ด้านล่างเพื่อลองใช้งานใหม่อีกครั้ง<br>
+    </h2>
+    
+
+    <br>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <a href="/Home" class="home" (click)="again()"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Go back to our
-        homepage</a>
+    <a href="/Home" class="home" (click)="again()"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Go back to homepage</a>
+</div>
+
+<div class="error" *ngIf="this.mailPage">
+    <img src="../assets/img/mail.png" width="150">
+    <p>Processing Completed!<p>
+    <h2 style="font-family: 'Kanit', sans-serif; font-size: 17px;" >
+        ระบบประมวลผลเสร็จสิ้น ขณะนี้ระบบได้ส่งผลลัพธจากการทำงานทั้งหมดไปยัง e-mail ที่ท่านได้กรอกเอาไว้แล้ว<br>
+        หากท่านต้องการใช้บริการอีกครั้งกรุณากดปุ่ม ‘Go back to homepage’<br>
+        <br>
+        ขอบคุณที่ใช้บริการ
+    </h2>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <a href="/Home" class="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Go back to homepage</a>
 </div>

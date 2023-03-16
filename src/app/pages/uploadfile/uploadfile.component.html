@@ -1,18 +1,32 @@
 <div class="nav">
     <app-navbar></app-navbar>
 </div>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400&display=swap" rel="stylesheet">
 <body>
-    <p>FileUpload
-        <br><h2>Only audio and video files may be uploaded.</h2>
-    </p>
-    <div class="cover"></div>
+    <br>
+    <span style=" font-weight: bold;font-size: 36px;color: #000;padding-left: 42%; margin-top: 50%;">
+        File Upload<br>
+    </span>
+
+
+    <div class="image" *ngIf="!this.isUpload">
+        <img src="../assets/img/warn.png" width="32" >
+    </div>
+        <span *ngIf="!this.isUpload" style="padding-left: 32%; font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left; color: #F8972C;">*warning* <br></span>
+        <span *ngIf="!this.isUpload" style="padding-left: 32%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left;">&#x2022; ผู้ใช้สามารถ upload ได้เฉพาะไฟล์เสียงหรือวิดีโอเท่านั้น<br></span>
+        <span *ngIf="!this.isUpload" style="padding-left: 32%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left;">&#x2022; ถ้าผู้ใช้ upload file ที่มีความยาวเกิน 15 นาที ระบบจะตัดให้เหลือเพียง 15 นาทีเท่านั้น<br></span>
+
+
+    <!-- <div class="cover"></div> -->
+    <p-toast position="top-right" key="tr"></p-toast>
     <div>
         <label for="images" class="drop-container">
             <span class="drop-title">Drop file here</span>
             or
             <input #fileUploader type="file" id="images" accept="audio/*,video/*" (change)="chooseFile($event)">
-            <p-toast position="top-right" key="tr"></p-toast>
+            
         </label>
         <app-audio-recording></app-audio-recording>
     </div>
@@ -53,18 +67,27 @@
                 Clear</button>
         </div>
     </div>
-    <div *ngIf="this.isUpload">
-        <span style="position: absolute;left: 445px;">
-            ในกรณีที่ไฟล์มีขนาดใหญ่ระบบอาจใช้เวลาในการประมวลผลนานกว่าปกติ 
-            <br>หากท่านต้องการรับแจ้งเตือนเมื่อประมวลผลเสร็จ กรุณากรอก e-mail ด้านล่าง (ไม่จำเป็น)
-            
+    <!-- *ngIf="this.isUpload" -->
+    
+        <div  *ngIf="this.isUpload" class="image" style="top: 635px; left: 404px;">
+            <img src="../assets/img/warn.png" width="32">
+        </div>
+        <span  *ngIf="this.isUpload" style="padding-left: 30%; font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left; color: #F8972C;">
+            *warning* <br>
         </span>
-        <br><br><br>
+        <span  *ngIf="this.isUpload" style="padding-left: 30%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
+            ในกรณีที่ไฟล์มีขนาดใหญ่ระบบอาจใช้เวลาในการประมวลผลนานกว่าปกติ<br>
+        </span>
+        <span  *ngIf="this.isUpload" style="padding-left: 30%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
+            หากท่านต้องการรับแจ้งเตือนเมื่อประมวลผลเสร็จ กรุณากรอก e-mail ด้านล่าง (ไม่จำเป็น)</span>
+        <br><br>
+    <div *ngIf="this.isUpload">      
         <span class="p-float-label" style="width: 12rem; position: absolute;left: 600px;">
             <input #email id="float-input" type="text" pInputText [(ngModel)]="value2">
             <label for="float-input">E-mail</label>
         </span>
-        <br><br>
+        <br><br><br>
+      
         <a class="link" href="/Result">
             <button (click)="sendMail(email.value)" href="/Result" >Get Process</button>
         </a>  

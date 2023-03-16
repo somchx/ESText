@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService, Result } from '../../services/api.service';
 import { MessageService } from 'primeng/api';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-uploadfile',
@@ -63,7 +62,7 @@ export class UploadfileComponent implements OnInit {
       }
       else{
         this.minutes = Math.floor(this.durationText / 60);
-        this.seconds = (this.durationText - this.minutes * 60).toFixed(0) +' seconds';
+        this.seconds = (this.durationText - this.minutes * 60).toFixed(0) +' minutes';
       }
       
       console.log(this.durationText);
@@ -151,8 +150,11 @@ export class UploadfileComponent implements OnInit {
   }
   sendMail(value : any){
       console.log(value)
-      this.api.postMail(value).subscribe(response => {
+      // if(value.length != 0)
+      // {
+       this.api.postMail(value).subscribe(response => {
         console.log(response)
-      });
+      }); 
+      // }
   }
 }

@@ -58,6 +58,8 @@ export interface Process {
   time : number
 }
 export interface Result{
+  status: number;
+  mail: any;
   class: any
   filename : string
   transcription : SpeechRecTranscription
