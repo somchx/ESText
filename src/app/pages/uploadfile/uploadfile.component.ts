@@ -56,7 +56,7 @@ export class UploadfileComponent implements OnInit {
       }
       this.durationText = audio.duration;
       
-      if(Math.floor(this.durationText / 60) >0){
+      if(Math.floor(this.durationText / 60) >0&& Math.floor(this.durationText / 60) <10){
         this.minutes = '0'+Math.floor(this.durationText / 60); 
         this.seconds = (this.durationText - this.minutes * 60).toFixed(0) +' minutes';
       }
