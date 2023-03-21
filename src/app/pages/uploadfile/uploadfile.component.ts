@@ -28,6 +28,9 @@ export class UploadfileComponent implements OnInit {
   seconds : any;
   value2 : any;
   value1 : any;
+  hours: number | undefined;
+  formatted :any;
+  duration : any;
   constructor(private api: ApiService, private messageService: MessageService) { }
 
   
@@ -48,25 +51,45 @@ export class UploadfileComponent implements OnInit {
     const audio = new Audio();
     audio.src = URL.createObjectURL(event.target.files[0]);
     audio.onloadedmetadata = () => {
-      if (audio.duration > 900){
+      if (audio.duration > 3600){
         this.messageService.add({
           key: 'tr', severity: 'warn',
-          summary: 'Warning', detail: "This file duration exceeds maximum limit. Maximum allowed file duration is 15 minutes."
+          summary: 'Warning', detail: "This file duration exceeds maximum limit. Maximum allowed file duration is 1 hour."
         });
       }
+      if(audio.duration < 1){
+        this.messageService.add({
+          key: 'tr', severity: 'error',
+          summary: 'Error', detail: "Sorry, The file can't be uploaded duration smaller than seconds"
+        });
+        this.isChoosed = false;
+        this.resetFileUploader()
+      }
       this.durationText = audio.duration;
-      
-      if(Math.floor(this.durationText / 60) >0&& Math.floor(this.durationText / 60) <10){
-        this.minutes = '0'+Math.floor(this.durationText / 60); 
-        this.seconds = (this.durationText - this.minutes * 60).toFixed(0) +' minutes';
+      this.hours = Math.floor(this.durationText  / 60 / 60);
+      this.minutes = Math.floor(this.durationText / 60) - (this.hours * 60);
+      if(this.durationText % 60>0&&this.durationText % 60<10){
+        this.seconds = '0'+(this.durationText % 60).toFixed(0)
       }
       else{
-        this.minutes = Math.floor(this.durationText / 60);
-        this.seconds = (this.durationText - this.minutes * 60).toFixed(0) +' minutes';
+        this.seconds = (this.durationText % 60).toFixed(0)
       }
       
-      console.log(this.durationText);
-      console.log(this.minutes);
+      
+      this.formatted = this.hours.toString().padStart(2, '0') + ':' + this.minutes.toString().padStart(2, '0') + ':' + this.seconds.toString().padStart(2, '0');
+      if(this.hours.toString().padStart(2, '0')=='00' && this.minutes.toString().padStart(2, '0') != '00'){
+        this.duration = this.formatted + ' minutes'
+        console.log(this.duration);
+      }
+      else if(this.hours.toString().padStart(2, '0')=='00' && this.minutes.toString().padStart(2, '0') == '00'){
+        this.duration = this.formatted + ' seconds'
+        console.log(this.duration);
+      }
+      else{
+        this.duration = this.formatted + ' hours'
+        console.log(this.duration);
+      }
+      console.log(this.formatted);
       
     };
     
