@@ -10,6 +10,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   upload(file: any): Observable<Process> {
     const body = new FormData()
+    
     body.append("", file)
     return this.http.post<Process>(this.baseUrl + "/upload", body).pipe(catchError(this.errorHandler));
   }
@@ -24,6 +25,7 @@ export class ApiService {
       // 'Access-Control-Allow-Headers':'Content-Type',
       // 'Access-Control-Allow-Origin': '*',
       // 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      // 'ngrok-skip-browser-warning' : 'any',
       'Cache-Control':'no-cache',
       'Pragma' :'no-cache',
     })
