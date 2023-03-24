@@ -14,9 +14,10 @@
     <div class="image" *ngIf="!this.isUpload">
         <img src="../assets/img/warn.png" width="32" >
     </div>
-        <span *ngIf="!this.isUpload" style="padding-left: 32%; font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left; color: #F8972C;">*warning* <br></span>
-        <span *ngIf="!this.isUpload" style="padding-left: 32%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left;">&#x2022; ผู้ใช้สามารถ upload ได้เฉพาะไฟล์เสียงหรือวิดีโอเท่านั้น<br></span>
-        <span *ngIf="!this.isUpload" style="padding-left: 32%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left;">&#x2022; ถ้าผู้ใช้ upload file ที่มีความยาวเกิน 1 ชั่วโมง ระบบจะตัดให้เหลือเพียง 1 ชั่วโมงเท่านั้น<br></span>
+    
+    <span *ngIf="!this.isUpload" style="padding-left: 32%; font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left; color: #F8972C;">*warning* <br></span>
+    <span *ngIf="!this.isUpload" style="padding-left: 32%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left;">&#x2022; ผู้ใช้สามารถ upload ได้เฉพาะไฟล์เสียงหรือวิดีโอเท่านั้น<br></span>
+    <span *ngIf="!this.isUpload" style="padding-left: 32%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left;">&#x2022; ถ้าผู้ใช้ upload file ที่มีความยาวเกิน 1 ชั่วโมง ระบบจะตัดให้เหลือเพียง 1 ชั่วโมงเท่านั้น<br></span>
 
 
     <!-- <div class="cover"></div> -->
@@ -69,16 +70,16 @@
     </div>
     <!-- *ngIf="this.isUpload" -->
     
-        <div  *ngIf="this.isUpload" class="image" style="top: 635px; left: 404px;">
+        <div *ngIf="this.isUpload" class="image" style="top: 650px; left: 404px;">
             <img src="../assets/img/warn.png" width="32">
         </div>
-        <span  *ngIf="this.isUpload" style="padding-left: 30%; font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left; color: #F8972C;">
+        <span *ngIf="this.isUpload" style="padding-left: 30%; font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left; color: #F8972C;">
             *warning* <br>
         </span>
-        <span  *ngIf="this.isUpload" style="padding-left: 30%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
+        <span *ngIf="this.isUpload" style="padding-left: 30%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
             ในกรณีที่ไฟล์มีขนาดใหญ่ระบบอาจใช้เวลาในการประมวลผลนานกว่าปกติ<br>
         </span>
-        <span  *ngIf="this.isUpload" style="padding-left: 30%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
+        <span *ngIf="this.isUpload" style="padding-left: 30%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
             หากท่านต้องการรับแจ้งเตือนเมื่อประมวลผลเสร็จ กรุณากรอก e-mail ด้านล่าง (ไม่จำเป็น)</span>
         <br><br>
     <div *ngIf="this.isUpload">      
