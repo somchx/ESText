@@ -1,9 +1,14 @@
-div {
+/* body {
   text-align: center;
   justify-content: center;
   align-items: center;
+} */
+.image{
+  position: absolute;
+  width: 29px;
+  left: 435px;
+  top: 163px;
 }
-
 .start-button {
   background-color: #bc1a1a;
   margin-top: 12px;

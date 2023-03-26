@@ -50,6 +50,7 @@ export class UploadfileComponent implements OnInit {
     console.log(this.file)
     const audio = new Audio();
     audio.src = URL.createObjectURL(event.target.files[0]);
+  
     audio.onloadedmetadata = () => {
       if (audio.duration > 3600){
         this.messageService.add({
@@ -57,7 +58,7 @@ export class UploadfileComponent implements OnInit {
           summary: 'Warning', detail: "This file duration exceeds maximum limit. Maximum allowed file duration is 1 hour."
         });
       }
-      if(audio.duration < 1){
+      if(audio.duration < 2){
         this.messageService.add({
           key: 'tr', severity: 'error',
           summary: 'Error', detail: "Sorry, The file can't be uploaded duration smaller than seconds"
@@ -66,7 +67,7 @@ export class UploadfileComponent implements OnInit {
         this.resetFileUploader()
       }
       this.durationText = audio.duration;
-      this.hours = Math.floor(this.durationText  / 60 / 60);
+      this.hours = Math.floor(this.durationText/60/60);
       this.minutes = Math.floor(this.durationText / 60) - (this.hours * 60);
       if(this.durationText % 60>0&&this.durationText % 60<10){
         this.seconds = '0'+(this.durationText % 60).toFixed(0)

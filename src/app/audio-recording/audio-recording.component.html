@@ -1,34 +1,57 @@
-<div>
+<body>
 	<!-- <button class="start-button" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</button> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<button class="start-button" [disabled]="isRecording" (click)="startRecording()"><i class="fa fa-microphone" aria-hidden="true"></i> Start Recording</button>
+	<button class="start-button" [disabled]="isRecording" (click)="startRecording()"><i class="fa fa-microphone"
+			aria-hidden="true"></i> Start Recording</button>
 	<!-- <button class="stop-button" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</button> -->
-	<button class="stop-button" *ngIf="isRecording" (click)="stopRecording()"><i class="fa fa-stop" aria-hidden="true"></i> Stop Recording</button>
+	<button class="stop-button" *ngIf="isRecording" (click)="stopRecording()"><i class="fa fa-stop"
+			aria-hidden="true"></i> Stop Recording</button>
 
-	
 
-	<button class="cancel-button" *ngIf="!isRecording && blobUrl" (click)="download()"><i class="fa fa-download"></i> Download Recording</button>
-	<button class="clear-button" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()"><i class="fa fa-trash-o fa-lg"></i> Clear Recording</button>
-	<button class="upload-button" *ngIf="!isRecording && blobUrl" (click)="upload()"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
-	
+	<button class="cancel-button" *ngIf="!isRecording && blobUrl && !this.isUpload" (click)="download()"><i
+			class="fa fa-download"></i> Download Recording</button>
+	<button class="clear-button" *ngIf="!isRecording && blobUrl && !this.isUpload" (click)="clearRecordedData()"><i
+			class="fa fa-trash-o fa-lg"></i> Clear Recording</button>
+	<button class="upload-button" *ngIf="!isRecording && blobUrl && !this.isUpload" (click)="upload()"><i
+			class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+
 	<br><br><br>
-	
+
 	<div *ngIf="isRecording && !blobUrl"> {{recordedTime}} </div>
 	<div class="spinner" *ngIf="this.isSpinner">
-        <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
-            fill="var(--surface-ground)" animationDuration=".8s"></p-progressSpinner>
-    </div>
-
-
-	
+		<p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
+			fill="var(--surface-ground)" animationDuration=".8s"></p-progressSpinner>
+	</div>
 	<div>
 		<audio *ngIf="!isRecording && blobUrl && !isUpload" controls>
 			<source [src]="blobUrl" type="audio/webm">
 		</audio>
 	</div>
-	<a class="link" href="/Result">
-        <div class="button">
-            <button class="upload-button" *ngIf="this.isUpload">Get Process</button>
-        </div>
-	</a>
-</div>
+
+	<div *ngIf="this.isUpload" class="image" style="top: 730px; left: 444px;">
+		<img src="../assets/img/warn.png" width="32">
+	</div>
+	<span *ngIf="this.isUpload"
+		style="padding-right: 400px;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; text-align: left; color: #F8972C;">
+		*warning* <br>
+	</span>
+	<span *ngIf="this.isUpload" style="font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
+		ในกรณีที่ไฟล์มีขนาดใหญ่ระบบอาจใช้เวลาในการประมวลผลนานกว่าปกติ<br>
+	</span>
+	<span *ngIf="this.isUpload"
+		style="padding-left: 9%;font-size: 16px; font-family: 'Kanit', sans-serif; font-weight: normal; ">
+		หากท่านต้องการรับแจ้งเตือนเมื่อประมวลผลเสร็จ กรุณากรอก e-mail ด้านล่าง (ไม่จำเป็น)
+	</span>
+	
+	<div *ngIf="this.isUpload">
+		<span class="p-float-label" style="width: 12rem; position: absolute;left: 600px;">
+			<input #email id="float-input" type="text" pInputText [(ngModel)]="value2">
+			<label for="float-input">E-mail</label>
+		</span>
+		<br><br><br>
+
+		<a class="link" href="/Result">
+			<button class="upload-button" (click)="sendMail(email.value)" href="/Result">Get Process</button>
+		</a>
+	</div>
+</body>

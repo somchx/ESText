@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AudioRecordingService } from "../services/audio-recording.service";
 import { DomSanitizer } from "@angular/platform-browser";
-import { ApiService } from "../services/api.service";
+import { ApiService, Result } from "../services/api.service";
 import { MessageService } from "primeng/api";
 
 @Component({
@@ -17,6 +17,9 @@ export class AudioRecordingComponent implements OnInit {
   blobUrl: any;
   teste: any;
   isSpinner: boolean = false;
+  isCompute: boolean = false;
+  result?: Result;
+  value2: any;
 
   constructor(
     private audioRecordingService: AudioRecordingService,
@@ -104,10 +107,25 @@ export class AudioRecordingComponent implements OnInit {
 
   
   getProcess(){
+    this.isCompute = true;
+    this.isUpload = false;
     this.api.getProcess().subscribe(response => {
+      this.result = response
       console.log(response)
+      if (this.result != null) {
+        this.isCompute = false;
+      }
     })
   }
+  sendMail(value : any){
+    console.log(value)
+    // if(value.length != 0)
+    // {
+     this.api.postMail(value).subscribe(response => {
+      console.log(response)
+    }); 
+    // }
+}
 
 
 }
