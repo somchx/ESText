@@ -27,7 +27,9 @@
             <span class="drop-title">Drop file here</span>
             or
             <input #fileUploader type="file" id="images" accept="audio/*,video/*" (change)="chooseFile($event)">
-            
+            <br>
+            <span style="font-size: 11px;">We support file format such as '.wav', '.ogg', '.mp3', '.flac', '.opus', '.m4a', '.oga', '.mid', '.aiff' , '.wma', '.au' , '.mp4'</span>
+
         </label>
         <app-audio-recording></app-audio-recording>
     </div>
