@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "estext313654"
+  },
+  "targets": {
+    "estext313654": {
+      "hosting": {
+        "ESText": [
+          "estext313654"
+        ]
+      }
+    }
+  }
+}
